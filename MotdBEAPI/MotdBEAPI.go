@@ -45,15 +45,15 @@ func MotdBE(Host string) *orderedmap.OrderedMap {
 	if err == nil {
 		MotdData := strings.Split(string(UDPdata), ";")
 		Jsondata.Set("status", "online")
-		Jsondata.Set("host", Host)               //服务器Host
-		Jsondata.Set("motd", MotdData[1])        //Motd
-		Jsondata.Set("agreement", MotdData[2])   //协议版本
-		Jsondata.Set("version", MotdData[3])     //游戏版本
-		Jsondata.Set("online", MotdData[4])      //在线人数
-		Jsondata.Set("max", MotdData[5])         //最大在线人数
-		Jsondata.Set("server_type", MotdData[7]) //服务器类型
-		Jsondata.Set("gamemode", MotdData[8])    //游戏模式
-		Jsondata.Set("delay", time2-time1)       //连接延迟
+		Jsondata.Set("host", Host)              //服务器Host
+		Jsondata.Set("motd", MotdData[1])       //Motd
+		Jsondata.Set("agreement", MotdData[2])  //协议版本
+		Jsondata.Set("version", MotdData[3])    //游戏版本
+		Jsondata.Set("online", MotdData[4])     //在线人数
+		Jsondata.Set("max", MotdData[5])        //最大在线人数
+		Jsondata.Set("level_name", MotdData[7]) //存档名字
+		Jsondata.Set("gamemode", MotdData[8])   //游戏模式
+		Jsondata.Set("delay", time2-time1)      //连接延迟
 	}
 
 	return Jsondata
