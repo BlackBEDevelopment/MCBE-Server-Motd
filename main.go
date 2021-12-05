@@ -25,8 +25,8 @@ func main() {
 		c.JSON(http.StatusOK, data)
 	})
 
+	fmt.Println("网站已经运行在8080端口")
 	if err := r.Run(":8080"); err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println("网站已经运行在8080端口")
 }
