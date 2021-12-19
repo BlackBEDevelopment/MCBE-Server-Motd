@@ -1,4 +1,4 @@
-module blackbe.xyz/MotdBE
+module github.com/BlackBEDevelopment/Minecraft-BedrockEdition-Server-Motd
 
 go 1.17
 

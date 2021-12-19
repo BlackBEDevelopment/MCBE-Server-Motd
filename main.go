@@ -1,9 +1,10 @@
 package main
 
 import (
-	"blackbe.xyz/MotdBE/MotdBEAPI"
 	"fmt"
 	"net/http"
+
+	"github.com/BlackBEDevelopment/Minecraft-BedrockEdition-Server-Motd/MotdBEAPI"
 
 	"github.com/gin-gonic/gin"
 )
@@ -15,8 +16,8 @@ func main() {
 	r.LoadHTMLGlob("assets/*")
 	r.Static("/assets", "./assets")
 	r.GET("/", func(c *gin.Context) {
-        c.HTML(http.StatusOK, "index.html", gin.H{})
-    })
+		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
 
 	r.GET("/api", func(c *gin.Context) {
 		Host := c.Query("host")
