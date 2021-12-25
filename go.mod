@@ -1,4 +1,4 @@
-module github.com/BlackBEDevelopment/Minecraft-BedrockEdition-Server-Motd
+module github.com/BlackBEDevelopment/MCBE-Server-Motd
 
 go 1.17
 
