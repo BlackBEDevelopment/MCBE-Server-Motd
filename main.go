@@ -13,8 +13,8 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
-	r.LoadHTMLGlob("assets/*")
-	r.Static("/assets", "./assets")
+	r.LoadHTMLGlob("fronend/dist/static/index.html")
+	r.Static("/static", "./fronend/dist/static")
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
 	})
