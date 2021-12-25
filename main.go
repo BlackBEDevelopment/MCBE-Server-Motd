@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/BlackBEDevelopment/Minecraft-BedrockEdition-Server-Motd/MotdBEAPI"
+	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
 
 	"github.com/gin-gonic/gin"
 )
