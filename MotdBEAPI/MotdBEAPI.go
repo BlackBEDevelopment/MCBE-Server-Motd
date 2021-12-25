@@ -35,6 +35,7 @@ func MotdBE(Host string) *orderedmap.OrderedMap {
 	}
 	// 接收数据
 	UDPdata := make([]byte, 4096)
+	socket.SetReadDeadline(time.Now().Add(5 * time.Second)) //设置读取五秒超时
 	_, err = socket.Read(UDPdata)
 	if err != nil {
 		Jsondata.Set("status", "offline")
