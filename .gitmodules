@@ -1,0 +1,3 @@
+[submodule "fronend"]
+	path = fronend
+	url = https://github.com/BlackBEDevelopment/mcbe-motd-frontend
