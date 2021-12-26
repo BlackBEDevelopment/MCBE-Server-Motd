@@ -45,7 +45,7 @@ go build .
 ## 🎬 引入项目
 ### 安装
 ``` shell
-go get -u github.com/yangxikun/gin-limit-by-key
+go get -u github.com/BlackBEDevelopment/MCBE-Server-Motd
 ```
 
 ### 例子
