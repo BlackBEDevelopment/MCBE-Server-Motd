@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2021-12-26 23:17:13
+ * @LastEditTime: 2021-12-27 00:59:40
  * @LastEditors: NyanCatda
  * @Description: 服务器状态图片生成
  * @FilePath: \MotdBE\StatusImg\StatusImg.go
@@ -10,11 +10,11 @@ package StatusImg
 
 import (
 	"bytes"
+	"fmt"
 	"image"
 	"image/color"
 	"image/png"
 	"io/ioutil"
-	"log"
 	"os"
 	"strconv"
 	"strings"
@@ -24,14 +24,34 @@ import (
 )
 
 func ServerStatusImg(Host string) *bytes.Buffer {
+	//获取服务器信息
+	ServerData := MotdBEAPI.MotdBE(Host)
+	if ServerData.Status == "offline" {
+		offlineImgFile, err := os.Open("StatusImg/background.png")
+		if err != nil {
+			fmt.Println(err)
+		}
+		offlineImg, err := png.Decode(offlineImgFile)
+		if err != nil {
+			fmt.Println(err)
+		}
+		//将图片写入Buffer
+		Buff := bytes.NewBuffer(nil)
+		err = png.Encode(Buff, offlineImg)
+		if err != nil {
+			fmt.Println(err)
+		}
+		return Buff
+	}
+
 	//读取背景图片
 	backgroundFile, err := os.Open("StatusImg/background.png")
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 	backgroundImg, err := png.Decode(backgroundFile)
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
 	}
 
 	//转换类型
@@ -40,11 +60,11 @@ func ServerStatusImg(Host string) *bytes.Buffer {
 	//读取字体数据
 	fontBytes, err := ioutil.ReadFile("StatusImg/SourceHanSansCN-VF.ttf")
 	if err != nil {
-		log.Println(err)
+		fmt.Println(err)
 	}
 	font, err := freetype.ParseFont(fontBytes)
 	if err != nil {
-		log.Println("load front fail", err)
+		fmt.Println(err)
 	}
 
 	f := freetype.NewContext()
@@ -59,9 +79,6 @@ func ServerStatusImg(Host string) *bytes.Buffer {
 	f.SetDst(img)
 	//设置字体颜色(白色)
 	f.SetSrc(image.NewUniform(color.RGBA{255, 255, 255, 255}))
-
-	//获取服务器信息
-	ServerData := MotdBEAPI.MotdBE(Host)
 
 	//设置字体的位置
 	pt := freetype.Pt(10, 40+int(f.PointToFixed(26))>>8)
@@ -83,7 +100,7 @@ func ServerStatusImg(Host string) *bytes.Buffer {
 	Buff := bytes.NewBuffer(nil)
 	err = png.Encode(Buff, img)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Println(err)
 	}
 	return Buff
 }
