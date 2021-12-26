@@ -4,6 +4,7 @@ package MotdBEAPI
 import (
 	"encoding/hex"
 	"net"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -15,13 +16,12 @@ type MotdBEInfo struct {
 	Motd      string `json:"motd"`       //Motd信息
 	Agreement string `json:"agreement"`  //协议版本
 	Version   string `json:"version"`    //支持的游戏版本
-	Online    string `json:"online"`     //在线人数
-	Max       string `json:"max"`        //最大在线人数
+	Online    int    `json:"online"`     //在线人数
+	Max       int    `json:"max"`        //最大在线人数
 	LevelName string `json:"level_name"` //存档名字
 	GameMode  string `json:"gamemode"`   //游戏模式
 	Delay     int64  `json:"delay"`      //连接延迟
 }
-
 
 //@description: 通过UDP请求获取MotdBE信息
 //@param {string} Host 服务器地址，nyan.xyz:19132
@@ -67,14 +67,16 @@ func MotdBE(Host string) *MotdBEInfo {
 	//解析数据
 	if err == nil {
 		MotdData := strings.Split(string(UDPdata), ";")
+		Online, _ := strconv.Atoi(MotdData[4])
+		Max, _ := strconv.Atoi(MotdData[5])
 		MotdInfo := &MotdBEInfo{
 			Status:    "online",
 			Host:      Host,
 			Motd:      MotdData[1],
 			Agreement: MotdData[2],
 			Version:   MotdData[3],
-			Online:    MotdData[4],
-			Max:       MotdData[5],
+			Online:    Online,
+			Max:       Max,
 			LevelName: MotdData[7],
 			GameMode:  MotdData[8],
 			Delay:     time2 - time1,

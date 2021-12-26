@@ -1,3 +1,11 @@
+/*
+ * @Author: NyanCatda
+ * @Date: 2021-12-05 22:27:13
+ * @LastEditTime: 2021-12-26 22:42:44
+ * @LastEditors: NyanCatda
+ * @Description:
+ * @FilePath: \MotdBE\main.go
+ */
 package main
 
 import (
@@ -7,11 +15,14 @@ import (
 	"strconv"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
+	"github.com/BlackBEDevelopment/MCBE-Server-Motd/StatusImg"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
+	StatusImg.ServerStatusImg("nyan.xyz")
+
 	RunPort := flag.Int("port", 8080, "指定运行端口")
 	flag.Parse()
 
