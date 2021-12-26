@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2021-12-26 22:51:08
+ * @LastEditTime: 2021-12-26 23:27:37
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -15,6 +15,7 @@ import (
 	"strconv"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
+	"github.com/BlackBEDevelopment/MCBE-Server-Motd/StatusImg"
 
 	"github.com/gin-gonic/gin"
 )
@@ -37,6 +38,13 @@ func main() {
 
 		data := MotdBEAPI.MotdBE(Host)
 		c.JSON(http.StatusOK, data)
+	})
+
+	r.GET("/status_img", func(c *gin.Context) {
+		Host := c.Query("host")
+
+		Img := StatusImg.ServerStatusImg(Host)
+		c.String(http.StatusOK, Img.String())
 	})
 
 	fmt.Println("程序已经运行在" + strconv.Itoa(*RunPort) + "端口")

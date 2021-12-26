@@ -5,7 +5,7 @@ go 1.17
 require github.com/gin-gonic/gin v1.7.7
 
 require (
-	github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20211226082252-143eb1f9d51c
+	github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20211226145135-8c22abe11acd
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
 	github.com/go-playground/universal-translator v0.17.0 // indirect
