@@ -45,7 +45,7 @@ go build .
 ## 🎬 引入项目
 ### 安装
 ``` shell
-go get -u github.com/BlackBEDevelopment/MCBE-Server-Motd
+go get -u github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI
 ```
 
 ### 例子
