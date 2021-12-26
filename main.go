@@ -1,8 +1,10 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
 
@@ -10,6 +12,9 @@ import (
 )
 
 func main() {
+	RunPort := flag.Int("port", 8080, "指定运行端口")
+	flag.Parse()
+
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
@@ -27,7 +32,7 @@ func main() {
 	})
 
 	fmt.Println("网站已经运行在8080端口")
-	if err := r.Run(":8080"); err != nil {
+	if err := r.Run(":" + strconv.Itoa(*RunPort)); err != nil {
 		fmt.Println(err)
 	}
 }
