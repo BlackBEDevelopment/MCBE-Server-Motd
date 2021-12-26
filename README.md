@@ -18,7 +18,7 @@ chmod +x ./MCBE-Server-Motd
 
 克隆仓库
 ``` shell
-git clone https://github.com/nyancatda/ShionBot.git --recurse-submodules
+git clone https://github.com/BlackBEDevelopment/MCBE-Server-Motd.git --recurse-submodules
 ```
 
 构建静态资源
