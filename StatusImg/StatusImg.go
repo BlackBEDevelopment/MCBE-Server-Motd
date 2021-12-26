@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2021-12-26 22:38:43
+ * @LastEditTime: 2021-12-26 22:47:20
  * @LastEditors: NyanCatda
  * @Description: 服务器状态图片生成
  * @FilePath: \MotdBE\StatusImg\StatusImg.go
@@ -15,6 +15,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"strconv"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
 	"github.com/golang/freetype"
@@ -71,13 +72,13 @@ func ServerStatusImg(Host string) {
 	pt = freetype.Pt(10, 140+int(f.PointToFixed(26))>>8)
 	f.DrawString("游戏版本: "+ServerData.Version, pt)
 	pt = freetype.Pt(10, 190+int(f.PointToFixed(26))>>8)
-	f.DrawString("在线人数: "+ServerData.Online+"", pt)
+	f.DrawString("在线人数: ", pt)
 	pt = freetype.Pt(10, 240+int(f.PointToFixed(26))>>8)
-	f.DrawString("存档名字: ", pt)
+	f.DrawString("存档名字: "+ServerData.LevelName, pt)
 	pt = freetype.Pt(10, 290+int(f.PointToFixed(26))>>8)
-	f.DrawString("游戏模式: ", pt)
+	f.DrawString("游戏模式: "+ServerData.GameMode, pt)
 	pt = freetype.Pt(10, 340+int(f.PointToFixed(26))>>8)
-	f.DrawString("连接延迟: ", pt)
+	f.DrawString("连接延迟: "+strconv.FormatInt(ServerData.Delay, 10), pt)
 
 	//以png 格式写入文件
 	err = png.Encode(imgfile, img)
