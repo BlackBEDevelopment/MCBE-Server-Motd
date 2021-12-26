@@ -1,3 +1,11 @@
+/*
+ * @Author: NyanCatda
+ * @Date: 2021-12-05 23:37:56
+ * @LastEditTime: 2021-12-26 15:45:50
+ * @LastEditors: Please set LastEditors
+ * @Description: MotdBE协议封装
+ * @FilePath: \MotdBE\MotdBEAPI\MotdBEAPI.go
+ */
 package MotdBEAPI
 
 import (
@@ -7,6 +15,9 @@ import (
 	"time"
 )
 
+/**
+ * @description: MotdBE信息
+ */
 type MotdBEInfo struct {
 	Status    string `json:"status"`     //服务器状态
 	Host      string `json:"host"`       //服务器Host
@@ -20,8 +31,11 @@ type MotdBEInfo struct {
 	Delay     int64  `json:"delay"`      //连接延迟
 }
 
-//使用MotdBE协议发起UDP请求，并获得返回
-//Host 服务器地址 nyan.xyz:19132
+/**
+ * @description: 通过UDP请求获取MotdBE信息
+ * @param {string} Host 服务器地址，nyan.xyz:19132
+ * @return {*MotdBEInfo}
+ */
 func MotdBE(Host string) *MotdBEInfo {
 	if Host == "" {
 		MotdInfo := &MotdBEInfo{
