@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2021-12-27 00:59:40
+ * @LastEditTime: 2021-12-28 01:40:15
  * @LastEditors: NyanCatda
  * @Description: 服务器状态图片生成
  * @FilePath: \MotdBE\StatusImg\StatusImg.go
@@ -84,7 +84,7 @@ func ServerStatusImg(Host string) *bytes.Buffer {
 	pt := freetype.Pt(10, 40+int(f.PointToFixed(26))>>8)
 	f.DrawString("MOTD: "+RemoveColorCode(ServerData.Motd), pt)
 	pt = freetype.Pt(10, 90+int(f.PointToFixed(26))>>8)
-	f.DrawString("协议版本: "+ServerData.Agreement, pt)
+	f.DrawString("协议版本: "+strconv.Itoa(ServerData.Agreement), pt)
 	pt = freetype.Pt(10, 140+int(f.PointToFixed(26))>>8)
 	f.DrawString("游戏版本: "+ServerData.Version, pt)
 	pt = freetype.Pt(10, 190+int(f.PointToFixed(26))>>8)
