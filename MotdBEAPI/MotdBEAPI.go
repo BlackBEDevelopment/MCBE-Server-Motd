@@ -14,7 +14,7 @@ type MotdBEInfo struct {
 	Status    string `json:"status"`     //服务器状态
 	Host      string `json:"host"`       //服务器Host
 	Motd      string `json:"motd"`       //Motd信息
-	Agreement string `json:"agreement"`  //协议版本
+	Agreement int    `json:"agreement"`  //协议版本
 	Version   string `json:"version"`    //支持的游戏版本
 	Online    int    `json:"online"`     //在线人数
 	Max       int    `json:"max"`        //最大在线人数
@@ -67,13 +67,14 @@ func MotdBE(Host string) *MotdBEInfo {
 	//解析数据
 	if err == nil {
 		MotdData := strings.Split(string(UDPdata), ";")
+		Agreement, _ := strconv.Atoi(MotdData[2])
 		Online, _ := strconv.Atoi(MotdData[4])
 		Max, _ := strconv.Atoi(MotdData[5])
 		MotdInfo := &MotdBEInfo{
 			Status:    "online",
 			Host:      Host,
 			Motd:      MotdData[1],
-			Agreement: MotdData[2],
+			Agreement: Agreement,
 			Version:   MotdData[3],
 			Online:    Online,
 			Max:       Max,
