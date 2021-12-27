@@ -67,13 +67,14 @@ func MotdBE(Host string) *MotdBEInfo {
 	//解析数据
 	if err == nil {
 		MotdData := strings.Split(string(UDPdata), ";")
+		Agreement, _ := strconv.Atoi(MotdData[2])
 		Online, _ := strconv.Atoi(MotdData[4])
 		Max, _ := strconv.Atoi(MotdData[5])
 		MotdInfo := &MotdBEInfo{
 			Status:    "online",
 			Host:      Host,
 			Motd:      MotdData[1],
-			Agreement: MotdData[2],
+			Agreement: Agreement,
 			Version:   MotdData[3],
 			Online:    Online,
 			Max:       Max,
