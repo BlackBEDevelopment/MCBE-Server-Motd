@@ -14,7 +14,7 @@ type MotdBEInfo struct {
 	Status    string `json:"status"`     //服务器状态
 	Host      string `json:"host"`       //服务器Host
 	Motd      string `json:"motd"`       //Motd信息
-	Agreement string `json:"agreement"`  //协议版本
+	Agreement int    `json:"agreement"`  //协议版本
 	Version   string `json:"version"`    //支持的游戏版本
 	Online    int    `json:"online"`     //在线人数
 	Max       int    `json:"max"`        //最大在线人数
