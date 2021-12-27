@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2021-12-26 23:27:37
+ * @LastEditTime: 2021-12-27 22:35:39
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -27,10 +27,16 @@ func main() {
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
 
-	r.LoadHTMLGlob("fronend/dist/static/index.html")
+	r.LoadHTMLGlob("fronend/dist/static/**.html")
 	r.Static("/static", "./fronend/dist/static")
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(http.StatusOK, "index.html", gin.H{})
+	})
+	r.GET("/iframe", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "iframe.html", gin.H{})
+	})
+	r.GET("/iframe.html", func(c *gin.Context) {
+		c.HTML(http.StatusOK, "iframe.html", gin.H{})
 	})
 
 	r.GET("/api", func(c *gin.Context) {
