@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2021-12-28 01:40:15
+ * @LastEditTime: 2021-12-28 12:12:55
  * @LastEditors: NyanCatda
  * @Description: 服务器状态图片生成
  * @FilePath: \MotdBE\StatusImg\StatusImg.go
@@ -25,7 +25,10 @@ import (
 
 func ServerStatusImg(Host string) *bytes.Buffer {
 	//获取服务器信息
-	ServerData := MotdBEAPI.MotdBE(Host)
+	ServerData, err := MotdBEAPI.MotdBE(Host)
+	if err != nil {
+		fmt.Println(err)
+	}
 	if ServerData.Status == "offline" {
 		offlineImgFile, err := os.Open("StatusImg/background.png")
 		if err != nil {

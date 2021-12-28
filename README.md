@@ -60,7 +60,10 @@ import (
 
 func main() {
 	Host := "nyan.xyz:19132"
-	data := MotdBEAPI.MotdBE(Host)
+	data, err := MotdBEAPI.MotdBE(Host)
+	if err != nil {
+		fmt.Println(err)
+	}
 	fmt.Println(data)
 }
 ```

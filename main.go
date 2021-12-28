@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2021-12-27 22:35:39
+ * @LastEditTime: 2021-12-28 12:12:23
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -42,7 +42,10 @@ func main() {
 	r.GET("/api", func(c *gin.Context) {
 		Host := c.Query("host")
 
-		data := MotdBEAPI.MotdBE(Host)
+		data, err := MotdBEAPI.MotdBE(Host)
+		if err != nil {
+			fmt.Println(err)
+		}
 		c.JSON(http.StatusOK, data)
 	})
 
