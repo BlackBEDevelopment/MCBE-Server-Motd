@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-
+//MotdJava信息
 type MotdJavaInfo struct {
 	Status    string `json:"status"`    //服务器状态
 	Host      string `json:"host"`      //服务器Host
@@ -42,6 +42,11 @@ type MotdJavaJson struct {
 	Favicon string `json:"favicon"` //服务器图标
 }
 
+
+//@description: 通过TCP请求获取Java服务器信息
+//@param {string} Host 服务器地址，nyan.xyz:19132
+//@return {MotdJavaInfo}
+//@return {error}
 func MotdJava(Host string) (MotdJavaInfo, error) {
 	//原代码来自 https://github.com/Cryptkeeper/go-minecraftping
 	var MotdInfo MotdJavaInfo

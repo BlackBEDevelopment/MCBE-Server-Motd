@@ -26,6 +26,7 @@ type MotdBEInfo struct {
 //@description: 通过UDP请求获取MotdBE信息
 //@param {string} Host 服务器地址，nyan.xyz:19132
 //@return {*MotdBEInfo}
+//@return {error}
 func MotdBE(Host string) (*MotdBEInfo, error) {
 	if Host == "" {
 		MotdInfo := &MotdBEInfo{
