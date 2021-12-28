@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2021-12-28 12:45:44
+ * @LastEditTime: 2021-12-28 12:49:13
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -49,6 +49,7 @@ func main() {
 		c.JSON(http.StatusOK, data)
 	})
 
+	//不要问为什么MotdBE可以请求Java
 	r.GET("/api/java", func(c *gin.Context) {
 		Host := c.Query("host")
 
