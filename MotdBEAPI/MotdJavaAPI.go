@@ -46,6 +46,12 @@ func MotdJava(Host string) (MotdJavaInfo, error) {
 	//原代码来自 https://github.com/Cryptkeeper/go-minecraftping
 	var MotdInfo MotdJavaInfo
 
+	//Host为空直接退出
+	if Host == "" {
+		MotdInfo.Status = "offline"
+		return MotdInfo, nil
+	}
+
 	timeout := time.Second * 5 //设置五秒超时
 	deadline := time.Now().Add(timeout)
 
