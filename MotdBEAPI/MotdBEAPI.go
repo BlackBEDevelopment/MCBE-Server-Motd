@@ -26,12 +26,12 @@ type MotdBEInfo struct {
 //@description: 通过UDP请求获取MotdBE信息
 //@param {string} Host 服务器地址，nyan.xyz:19132
 //@return {*MotdBEInfo}
-func MotdBE(Host string) *MotdBEInfo {
+func MotdBE(Host string) (*MotdBEInfo, error) {
 	if Host == "" {
 		MotdInfo := &MotdBEInfo{
 			Status: "offline",
 		}
-		return MotdInfo
+		return MotdInfo, nil
 	}
 
 	// 创建连接
@@ -40,7 +40,7 @@ func MotdBE(Host string) *MotdBEInfo {
 		MotdInfo := &MotdBEInfo{
 			Status: "offline",
 		}
-		return MotdInfo
+		return MotdInfo, err
 	}
 	defer socket.Close()
 	// 发送数据
@@ -51,7 +51,7 @@ func MotdBE(Host string) *MotdBEInfo {
 		MotdInfo := &MotdBEInfo{
 			Status: "offline",
 		}
-		return MotdInfo
+		return MotdInfo, err
 	}
 	// 接收数据
 	UDPdata := make([]byte, 4096)
@@ -61,7 +61,7 @@ func MotdBE(Host string) *MotdBEInfo {
 		MotdInfo := &MotdBEInfo{
 			Status: "offline",
 		}
-		return MotdInfo
+		return MotdInfo, err
 	}
 	time2 := time.Now().UnixNano() / 1e6 //记录接收时间
 	//解析数据
@@ -82,11 +82,11 @@ func MotdBE(Host string) *MotdBEInfo {
 			GameMode:  MotdData[8],
 			Delay:     time2 - time1,
 		}
-		return MotdInfo
+		return MotdInfo, nil
 	}
 
 	MotdInfo := &MotdBEInfo{
 		Status: "offline",
 	}
-	return MotdInfo
+	return MotdInfo, err
 }
