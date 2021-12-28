@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2021-12-28 12:12:23
+ * @LastEditTime: 2021-12-28 12:45:44
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -43,6 +43,16 @@ func main() {
 		Host := c.Query("host")
 
 		data, err := MotdBEAPI.MotdBE(Host)
+		if err != nil {
+			fmt.Println(err)
+		}
+		c.JSON(http.StatusOK, data)
+	})
+
+	r.GET("/api/java", func(c *gin.Context) {
+		Host := c.Query("host")
+
+		data, err := MotdBEAPI.MotdJava(Host)
 		if err != nil {
 			fmt.Println(err)
 		}
