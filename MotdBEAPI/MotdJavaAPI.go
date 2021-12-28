@@ -22,17 +22,24 @@ type MotdJavaInfo struct {
 	Version   string `json:"version"`   //支持的游戏版本
 	Online    int    `json:"online"`    //在线人数
 	Max       int    `json:"max"`       //最大在线人数
-	Favicon   string `json:"favicon"`   //服务器图标
-	Delay     int64  `json:"delay"`     //连接延迟
+	Sample    []struct {
+		Id   string `json:"id"`   //在线玩家ID
+		Name string `json:"name"` //在线玩家名字
+	} `json:"sample"` //在线玩家列表
+	Favicon string `json:"favicon"` //服务器图标
+	Delay   int64  `json:"delay"`   //连接延迟
 }
 
+//原始Motd信息解析
 type MotdJavaJson struct {
-	Description struct {
-		Text string `json:"text"` //服务器说明文本
-	} `json:"description"`
-	Players struct {
+	Description json.RawMessage `json:"description"` //服务器说明文本
+	Players     struct {
 		Max    int `json:"max"`    //服务器最大在线
 		Online int `json:"online"` //服务器当前在线
+		Sample []struct {
+			Id   string `json:"id"`   //在线玩家ID
+			Name string `json:"name"` //在线玩家名字
+		} `json:"sample"` //在线玩家列表
 	} `json:"players"`
 	Version struct {
 		Name     string `json:"name"`     //可用游戏版本
@@ -41,7 +48,6 @@ type MotdJavaJson struct {
 
 	Favicon string `json:"favicon"` //服务器图标
 }
-
 
 //@description: 通过TCP请求获取Java服务器信息
 //@param {string} Host 服务器地址，nyan.xyz:19132
@@ -140,14 +146,25 @@ func MotdJava(Host string) (MotdJavaInfo, error) {
 		return MotdInfo, err
 	}
 
+	//区分Motd
+	var MotdTextJson map[string]interface{}
+	var MotdText string
+	if err = json.Unmarshal(resp.Description, &MotdTextJson); err != nil {
+		//如果服务器直接返回Motd，则直接解析Json到MotdText
+		json.Unmarshal(resp.Description, &MotdText)
+	} else {
+		MotdText = MotdTextJson["text"].(string)
+	}
+
 	//对返回进行二次封装
 	MotdInfo.Status = "online"
 	MotdInfo.Host = Host
-	MotdInfo.Motd = resp.Description.Text
+	MotdInfo.Motd = MotdText
 	MotdInfo.Agreement = resp.Version.Protocol
 	MotdInfo.Version = resp.Version.Name
 	MotdInfo.Online = resp.Players.Online
 	MotdInfo.Max = resp.Players.Max
+	MotdInfo.Sample = resp.Players.Sample
 	MotdInfo.Favicon = resp.Favicon
 	MotdInfo.Delay = time2 - time1 //计算延迟
 	return MotdInfo, nil
