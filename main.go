@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2022-01-03 00:44:56
+ * @LastEditTime: 2022-01-03 15:46:02
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -70,6 +70,13 @@ func main() {
 		Host := c.Query("host")
 
 		Img := StatusImg.ServerStatusImg(Host)
+		c.String(http.StatusOK, Img.String())
+	})
+
+	r.GET("/status_img/java", cache.CacheByRequestURI(memoryStore, 10*time.Second), func(c *gin.Context) {
+		Host := c.Query("host")
+
+		Img := StatusImg.ServerStatusImgJava(Host)
 		c.String(http.StatusOK, Img.String())
 	})
 
