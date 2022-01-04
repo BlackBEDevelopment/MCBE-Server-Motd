@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2021-12-28 12:49:13
+ * @LastEditTime: 2022-01-03 15:46:02
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MotdBE\main.go
@@ -13,9 +13,12 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"time"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/StatusImg"
+	cache "github.com/chenyahui/gin-cache"
+	"github.com/chenyahui/gin-cache/persist"
 
 	"github.com/gin-gonic/gin"
 )
@@ -26,6 +29,9 @@ func main() {
 
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
+
+	//初始化缓存
+	memoryStore := persist.NewMemoryStore(1 * time.Minute)
 
 	r.LoadHTMLGlob("fronend/dist/static/**.html")
 	r.Static("/static", "./fronend/dist/static")
@@ -60,10 +66,17 @@ func main() {
 		c.JSON(http.StatusOK, data)
 	})
 
-	r.GET("/status_img", func(c *gin.Context) {
+	r.GET("/status_img", cache.CacheByRequestURI(memoryStore, 10*time.Second), func(c *gin.Context) {
 		Host := c.Query("host")
 
 		Img := StatusImg.ServerStatusImg(Host)
+		c.String(http.StatusOK, Img.String())
+	})
+
+	r.GET("/status_img/java", cache.CacheByRequestURI(memoryStore, 10*time.Second), func(c *gin.Context) {
+		Host := c.Query("host")
+
+		Img := StatusImg.ServerStatusImgJava(Host)
 		c.String(http.StatusOK, Img.String())
 	})
 
