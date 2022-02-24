@@ -67,3 +67,8 @@ func main() {
 	fmt.Println(data)
 }
 ```
+
+## 📖许可证
+项目采用`Mozilla Public License Version 2.0`协议开源
+
+二次修改源代码需要开源修改后的代码，对源代码修改之处需要提供说明文档
