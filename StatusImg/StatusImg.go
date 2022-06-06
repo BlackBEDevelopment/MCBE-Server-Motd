@@ -1,10 +1,10 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2022-01-03 13:26:27
+ * @LastEditTime: 2022-06-06 23:44:07
  * @LastEditors: NyanCatda
  * @Description: 服务器状态图片生成
- * @FilePath: \MotdBE\StatusImg\StatusImg.go
+ * @FilePath: \MCBE-Server-Motd\StatusImg\StatusImg.go
  */
 package StatusImg
 
@@ -16,8 +16,8 @@ import (
 	"image/png"
 	"io/ioutil"
 	"os"
+	"regexp"
 	"strconv"
-	"strings"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
 	"github.com/golang/freetype"
@@ -127,43 +127,8 @@ func ServerStatusImg(Host string) *bytes.Buffer {
  * @return {string}
  */
 func RemoveColorCode(String string) string {
-	String = strings.Replace(String, "§0", "", -1)
-	String = strings.Replace(String, "§1", "", -1)
-	String = strings.Replace(String, "§2", "", -1)
-	String = strings.Replace(String, "§3", "", -1)
-	String = strings.Replace(String, "§4", "", -1)
-	String = strings.Replace(String, "§5", "", -1)
-	String = strings.Replace(String, "§6", "", -1)
-	String = strings.Replace(String, "§7", "", -1)
-	String = strings.Replace(String, "§8", "", -1)
-	String = strings.Replace(String, "§9", "", -1)
-	String = strings.Replace(String, "§a", "", -1)
-	String = strings.Replace(String, "§b", "", -1)
-	String = strings.Replace(String, "§c", "", -1)
-	String = strings.Replace(String, "§d", "", -1)
-	String = strings.Replace(String, "§e", "", -1)
-	String = strings.Replace(String, "§f", "", -1)
-	String = strings.Replace(String, "§g", "", -1)
-	String = strings.Replace(String, "§h", "", -1)
-	String = strings.Replace(String, "§i", "", -1)
-	String = strings.Replace(String, "§j", "", -1)
-	String = strings.Replace(String, "§k", "", -1)
-	String = strings.Replace(String, "§l", "", -1)
-	String = strings.Replace(String, "§m", "", -1)
-	String = strings.Replace(String, "§n", "", -1)
-	String = strings.Replace(String, "§o", "", -1)
-	String = strings.Replace(String, "§p", "", -1)
-	String = strings.Replace(String, "§q", "", -1)
-	String = strings.Replace(String, "§r", "", -1)
-	String = strings.Replace(String, "§s", "", -1)
-	String = strings.Replace(String, "§t", "", -1)
-	String = strings.Replace(String, "§u", "", -1)
-	String = strings.Replace(String, "§v", "", -1)
-	String = strings.Replace(String, "§w", "", -1)
-	String = strings.Replace(String, "§x", "", -1)
-	String = strings.Replace(String, "§y", "", -1)
-	String = strings.Replace(String, "§z", "", -1)
-	return String
+	reg := regexp.MustCompile(`§[0-9]|§[a-z]`)
+	return reg.ReplaceAllString(String, "")
 }
 
 /**
