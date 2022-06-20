@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-06-20 13:12:12
- * @LastEditTime: 2022-06-20 13:17:02
+ * @LastEditTime: 2022-06-20 13:42:28
  * @LastEditors: NyanCatda
  * @Description: 路由注册
  * @FilePath: \MCBE-Server-Motd\Routers.go
@@ -9,7 +9,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 
@@ -18,6 +17,7 @@ import (
 	cache "github.com/chenyahui/gin-cache"
 	"github.com/chenyahui/gin-cache/persist"
 	"github.com/gin-gonic/gin"
+	"github.com/nyancatda/AyaLog"
 )
 
 /**
@@ -26,6 +26,9 @@ import (
  * @return {*gin.Engine} gin引擎
  */
 func SetupRouter(r *gin.Engine) *gin.Engine {
+	// 500错误处理
+	r.Use(ServerError)
+
 	// 注册静态资源
 	r.Static("/static", "./fronend/dist/static")
 
@@ -51,7 +54,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 		data, err := MotdBEAPI.MotdBE(Host)
 		if err != nil {
-			fmt.Println(err)
+			AyaLog.DeBug("Request", err)
 		}
 		c.JSON(http.StatusOK, data)
 	})
@@ -63,7 +66,7 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 		data, err := MotdBEAPI.MotdJava(Host)
 		if err != nil {
-			fmt.Println(err)
+			AyaLog.DeBug("Request", err)
 		}
 		c.JSON(http.StatusOK, data)
 	})
@@ -75,7 +78,12 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	r.GET("/status_img", cache.CacheByRequestURI(memoryStore, 10*time.Second), func(c *gin.Context) {
 		Host := c.Query("host")
 
-		Img := StatusImg.ServerStatusImg(Host)
+		Img, err := StatusImg.ServerStatusImg(Host)
+		if err != nil {
+			AyaLog.Error("Request", err)
+			c.String(http.StatusInternalServerError, "Server Error")
+			return
+		}
 		c.String(http.StatusOK, Img.String())
 	})
 
@@ -83,9 +91,34 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	r.GET("/status_img/java", cache.CacheByRequestURI(memoryStore, 10*time.Second), func(c *gin.Context) {
 		Host := c.Query("host")
 
-		Img := StatusImg.ServerStatusImgJava(Host)
+		Img, err := StatusImg.ServerStatusImgJava(Host)
+		if err != nil {
+			AyaLog.Error("Request", err)
+			c.String(http.StatusInternalServerError, "Server Error")
+			return
+		}
 		c.String(http.StatusOK, Img.String())
 	})
 
 	return r
+}
+
+/**
+ * @description: 500错误处理
+ * @param {*gin.Context} c
+ * @return {*}
+ */
+func ServerError(c *gin.Context) {
+	defer func() {
+		if r := recover(); r != nil {
+			// 打印错误堆栈信息
+			AyaLog.Error("Request", r.(error))
+
+			// 500返回
+			c.String(http.StatusInternalServerError, "Server Error")
+			c.Abort()
+			return
+		}
+	}()
+	c.Next()
 }

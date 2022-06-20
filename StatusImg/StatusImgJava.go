@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2022-06-20 13:18:42
+ * @LastEditTime: 2022-06-20 13:28:07
  * @LastEditors: NyanCatda
  * @Description: Java服务器状态图片生成
  * @FilePath: \MCBE-Server-Motd\StatusImg\StatusImgJava.go
@@ -11,7 +11,6 @@ package StatusImg
 import (
 	"bytes"
 	"encoding/base64"
-	"fmt"
 	"image"
 	"image/color"
 	"image/draw"
@@ -29,39 +28,40 @@ import (
  * @description: Java服务器状态图片生成
  * @param {string} Host 服务器地址
  * @return {*bytes.Buffer} 图片Buffer
+ * @return {error} 错误
  */
-func ServerStatusImgJava(Host string) *bytes.Buffer {
+func ServerStatusImgJava(Host string) (*bytes.Buffer, error) {
 	//获取服务器信息
 	ServerData, err := MotdBEAPI.MotdJava(Host)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 	if ServerData.Status == "offline" {
 		offlineImgFile, err := os.Open("StatusImg/background.png")
 		if err != nil {
-			fmt.Println(err)
+			return nil, err
 		}
 		offlineImg, err := png.Decode(offlineImgFile)
 		if err != nil {
-			fmt.Println(err)
+			return nil, err
 		}
 		//将图片写入Buffer
 		Buff := bytes.NewBuffer(nil)
 		err = png.Encode(Buff, offlineImg)
 		if err != nil {
-			fmt.Println(err)
+			return nil, err
 		}
-		return Buff
+		return Buff, nil
 	}
 
 	//读取背景图片
 	backgroundFile, err := os.Open("StatusImg/background.png")
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 	backgroundImg, err := png.Decode(backgroundFile)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
 	//转换类型
@@ -70,11 +70,11 @@ func ServerStatusImgJava(Host string) *bytes.Buffer {
 	//读取字体数据
 	fontBytes, err := ioutil.ReadFile("StatusImg/unifont-12.1.04.ttf")
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 	font, err := freetype.ParseFont(fontBytes)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
 
 	//设置标题字体
@@ -128,7 +128,7 @@ func ServerStatusImgJava(Host string) *bytes.Buffer {
 	Buff := bytes.NewBuffer(nil)
 	err = png.Encode(Buff, img)
 	if err != nil {
-		fmt.Println(err)
+		return nil, err
 	}
-	return Buff
+	return Buff, nil
 }
