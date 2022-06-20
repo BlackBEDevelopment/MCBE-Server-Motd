@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2022-06-06 23:44:07
+ * @LastEditTime: 2022-06-20 13:18:32
  * @LastEditors: NyanCatda
  * @Description: 服务器状态图片生成
  * @FilePath: \MCBE-Server-Motd\StatusImg\StatusImg.go
@@ -23,6 +23,11 @@ import (
 	"github.com/golang/freetype"
 )
 
+/**
+ * @description: 服务器状态图片生成
+ * @param {string} Host 服务器地址
+ * @return {*bytes.Buffer} 图片Buffer
+ */
 func ServerStatusImg(Host string) *bytes.Buffer {
 	//获取服务器信息
 	ServerData, err := MotdBEAPI.MotdBE(Host)

@@ -1,10 +1,10 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-26 21:23:59
- * @LastEditTime: 2022-01-03 16:29:15
+ * @LastEditTime: 2022-06-20 13:18:42
  * @LastEditors: NyanCatda
  * @Description: Java服务器状态图片生成
- * @FilePath: \MotdBE\StatusImg\StatusImgJava.go
+ * @FilePath: \MCBE-Server-Motd\StatusImg\StatusImgJava.go
  */
 package StatusImg
 
@@ -25,6 +25,11 @@ import (
 	"github.com/golang/freetype"
 )
 
+/**
+ * @description: Java服务器状态图片生成
+ * @param {string} Host 服务器地址
+ * @return {*bytes.Buffer} 图片Buffer
+ */
 func ServerStatusImgJava(Host string) *bytes.Buffer {
 	//获取服务器信息
 	ServerData, err := MotdBEAPI.MotdJava(Host)
