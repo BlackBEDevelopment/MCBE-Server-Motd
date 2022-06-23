@@ -4,8 +4,9 @@ go 1.17
 
 require (
 	github.com/gin-gonic/gin v1.8.1
-	github.com/nyancatda/AyaLog v1.0.5
+	github.com/nyancatda/AyaLog v1.0.6
 	github.com/nyancatda/AyaLog/ModLog/GinLog v0.0.0-20220606093827-834efb2bcb30
+	github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220623153654-e4e69037a75a
 )
 
 require (
@@ -37,6 +38,7 @@ require (
 	github.com/dgryski/go-rendezvous v0.0.0-20200823014737-9f7001d12a5f // indirect
 	github.com/go-redis/redis/v8 v8.11.4 // indirect
 	github.com/goccy/go-json v0.9.7 // indirect
+	github.com/jasonlvhit/gocron v0.0.1 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.2 // indirect
 	golang.org/x/net v0.0.0-20220617184016-355a448f1bc9 // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect

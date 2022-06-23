@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2022-06-20 13:46:32
+ * @LastEditTime: 2022-06-23 23:39:57
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MCBE-Server-Motd\main.go
@@ -16,6 +16,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/nyancatda/AyaLog"
 	"github.com/nyancatda/AyaLog/ModLog/GinLog"
+	"github.com/nyancatda/AyaLog/TimedTask"
 )
 
 func main() {
@@ -27,6 +28,9 @@ func main() {
 	if !*DeBug {
 		AyaLog.LogLevel = AyaLog.INFO
 	}
+
+	// 启用日志压缩与清理任务
+	go TimedTask.Start()
 
 	// 关闭Gin默认的日志输出
 	gin.DefaultWriter = ioutil.Discard
