@@ -6,7 +6,7 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/nyancatda/AyaLog v1.0.6
 	github.com/nyancatda/AyaLog/ModLog/GinLog v0.0.0-20220606093827-834efb2bcb30
-	github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220623153654-e4e69037a75a
+	github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220627152527-68e778cd1741
 )
 
 require (

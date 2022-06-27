@@ -95,6 +95,8 @@ github.com/nyancatda/AyaLog/ModLog/GinLog v0.0.0-20220606093827-834efb2bcb30 h1:
 github.com/nyancatda/AyaLog/ModLog/GinLog v0.0.0-20220606093827-834efb2bcb30/go.mod h1:OJBSMsNqE0XjWJewYs/1ZK80UcNu58fD0bwrfy7HgaA=
 github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220623153654-e4e69037a75a h1:JMwy1nKX0746PRY6H1D27wS75NIQOqEZrBb5b4/5mC8=
 github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220623153654-e4e69037a75a/go.mod h1:wA7G2fQ3YKPNuAIYtAZbefWOlK8EULUZ3lcTpviwHP4=
+github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220627152527-68e778cd1741 h1:c3L11WeKQy0Jj1qjB7MtvwJIfOqbcd5A3UiqNULvK8s=
+github.com/nyancatda/AyaLog/TimedTask v0.0.0-20220627152527-68e778cd1741/go.mod h1:wA7G2fQ3YKPNuAIYtAZbefWOlK8EULUZ3lcTpviwHP4=
 github.com/onsi/ginkgo v1.6.0/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.10.1/go.mod h1:lLunBs/Ym6LB5Z9jYTR76FiuTmxDTDusOGeTQH+WWjE=
 github.com/onsi/ginkgo v1.12.1/go.mod h1:zj2OWP4+oCPe1qIXoGWkgMRwljMUYCdkwsT2108oapk=
