@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-06-20 13:12:12
- * @LastEditTime: 2022-06-20 13:42:28
+ * @LastEditTime: 2022-06-28 17:01:33
  * @LastEditors: NyanCatda
  * @Description: 路由注册
  * @FilePath: \MCBE-Server-Motd\Routers.go
@@ -9,7 +9,9 @@
 package main
 
 import (
+	"io/ioutil"
 	"net/http"
+	"path"
 	"time"
 
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI"
@@ -30,23 +32,11 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 	r.Use(ServerError)
 
 	// 注册静态资源
-	r.Static("/static", "./fronend/dist/static")
+	r.Static("/static", "fronend/dist/static")
+	r.StaticFile("/favicon.ico", "fronend/dist/static/favicon.ico")
 
-	// 注册HTML资源
-	r.LoadHTMLGlob("fronend/dist/static/**.html")
-
-	// 主页
-	r.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{})
-	})
-	// iframe
-	r.GET("/iframe", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "iframe.html", gin.H{})
-	})
-	// iframe
-	r.GET("/iframe.html", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "iframe.html", gin.H{})
-	})
+	// 注册前端页面
+	FrontendRouter(r)
 
 	// 基岩版查询API
 	r.GET("/api", func(c *gin.Context) {
@@ -121,4 +111,29 @@ func ServerError(c *gin.Context) {
 		}
 	}()
 	c.Next()
+}
+
+/**
+ * @description: 前端文件路由注册
+ * @param {*gin.Engine} r 路由引擎
+ * @return {*gin.Engine} 路由引擎
+ */
+func FrontendRouter(r *gin.Engine) *gin.Engine {
+	// 遍历目录下的所有HTML文件
+	HTMLFiles, err := ioutil.ReadDir("fronend/dist/static")
+	if err != nil {
+		AyaLog.Error("System", err)
+	}
+	// 注册index.html
+	r.StaticFile("/", "fronend/dist/static/index.html")
+	// 循环注册其他HTML文件
+	for _, File := range HTMLFiles {
+		// 判断是否为HTML文件
+		FileName := File.Name()
+		if path.Ext(FileName) == ".html" {
+			r.StaticFile(FileName, "fronend/dist/static/"+FileName)
+		}
+	}
+
+	return r
 }
