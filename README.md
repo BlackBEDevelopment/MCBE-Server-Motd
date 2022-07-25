@@ -1,5 +1,13 @@
 # Minecraft BedrockEdition Server Motd
-我的世界基岩版服务器Motd协议的API封装
+我的世界服务器Motd协议封装和HTTP API实践
+
+虽然叫"BedrockEdition Server Motd"，但是也支持Java Server哦 : )
+
+## 🛫 使用
+### 官方部署站点
+[https://motdbe.blackbe.xyz/](https://motdbe.blackbe.xyz/)
+### API 文档
+[BlackBE Wiki](https://wiki.blackbe.xyz/OpenAPI/tools.html#get-https-motdbe-blackbe-xyz-api-%E8%8E%B7%E5%8F%96%E5%9F%BA%E5%B2%A9%E7%89%88%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%8A%B6%E6%80%81)
 
 ## 🛠️ 部署
 ``` shell
