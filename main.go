@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2021-12-05 22:27:13
- * @LastEditTime: 2022-06-23 23:39:57
+ * @LastEditTime: 2022-09-21 12:18:03
  * @LastEditors: NyanCatda
  * @Description:
  * @FilePath: \MCBE-Server-Motd\main.go
@@ -33,7 +33,9 @@ func main() {
 	go TimedTask.Start()
 
 	// 关闭Gin默认的日志输出
-	gin.DefaultWriter = ioutil.Discard
+	if !*DeBug {
+		gin.DefaultWriter = ioutil.Discard
+	}
 
 	// 初始化Gin
 	gin.SetMode(gin.ReleaseMode)

@@ -1,7 +1,7 @@
 /*
  * @Author: NyanCatda
  * @Date: 2022-06-20 13:12:12
- * @LastEditTime: 2022-06-28 17:01:33
+ * @LastEditTime: 2022-09-21 12:16:52
  * @LastEditors: NyanCatda
  * @Description: 路由注册
  * @FilePath: \MCBE-Server-Motd\Routers.go
@@ -18,6 +18,7 @@ import (
 	"github.com/BlackBEDevelopment/MCBE-Server-Motd/StatusImg"
 	cache "github.com/chenyahui/gin-cache"
 	"github.com/chenyahui/gin-cache/persist"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/nyancatda/AyaLog"
 )
@@ -37,6 +38,12 @@ func SetupRouter(r *gin.Engine) *gin.Engine {
 
 	// 注册前端页面
 	FrontendRouter(r)
+
+	// 注册跨域请求头
+	CorsConfig := cors.DefaultConfig()
+	CorsConfig.AllowOrigins = []string{"*"}
+	CorsConfig.AllowHeaders = []string{"*"}
+	r.Use(cors.New(CorsConfig))
 
 	// 基岩版查询API
 	r.GET("/api", func(c *gin.Context) {

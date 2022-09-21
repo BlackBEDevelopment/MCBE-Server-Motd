@@ -3,6 +3,7 @@ module github.com/BlackBEDevelopment/MCBE-Server-Motd
 go 1.17
 
 require (
+	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/nyancatda/AyaLog v1.0.6
 	github.com/nyancatda/AyaLog/ModLog/GinLog v0.0.0-20220606093827-834efb2bcb30
