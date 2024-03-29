@@ -1,4 +1,4 @@
-//MotdBE协议封装
+// MotdBE协议封装
 package MotdBEAPI
 
 import (
@@ -9,7 +9,7 @@ import (
 	"time"
 )
 
-//MotdBE信息
+// MotdBE信息
 type MotdBEInfo struct {
 	Status    string `json:"status"`     //服务器状态
 	Host      string `json:"host"`       //服务器Host
@@ -23,10 +23,10 @@ type MotdBEInfo struct {
 	Delay     int64  `json:"delay"`      //连接延迟
 }
 
-//@description: 通过UDP请求获取MotdBE信息
-//@param {string} Host 服务器地址，nyan.xyz:19132
-//@return {*MotdBEInfo}
-//@return {error}
+// @description: 通过UDP请求获取MotdBE信息
+// @param {string} Host 服务器地址，nyan.xyz:19132
+// @return {*MotdBEInfo}
+// @return {error}
 func MotdBE(Host string) (*MotdBEInfo, error) {
 	if Host == "" {
 		MotdInfo := &MotdBEInfo{
@@ -66,28 +66,21 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 	}
 	time2 := time.Now().UnixNano() / 1e6 //记录接收时间
 	//解析数据
-	if err == nil {
-		MotdData := strings.Split(string(UDPdata), ";")
-		Agreement, _ := strconv.Atoi(MotdData[2])
-		Online, _ := strconv.Atoi(MotdData[4])
-		Max, _ := strconv.Atoi(MotdData[5])
-		MotdInfo := &MotdBEInfo{
-			Status:    "online",
-			Host:      Host,
-			Motd:      MotdData[1],
-			Agreement: Agreement,
-			Version:   MotdData[3],
-			Online:    Online,
-			Max:       Max,
-			LevelName: MotdData[7],
-			GameMode:  MotdData[8],
-			Delay:     time2 - time1,
-		}
-		return MotdInfo, nil
-	}
-
+	MotdData := strings.Split(string(UDPdata), ";")
+	Agreement, _ := strconv.Atoi(MotdData[2])
+	Online, _ := strconv.Atoi(MotdData[4])
+	Max, _ := strconv.Atoi(MotdData[5])
 	MotdInfo := &MotdBEInfo{
-		Status: "offline",
+		Status:    "online",
+		Host:      Host,
+		Motd:      MotdData[1],
+		Agreement: Agreement,
+		Version:   MotdData[3],
+		Online:    Online,
+		Max:       Max,
+		LevelName: MotdData[7],
+		GameMode:  MotdData[8],
+		Delay:     time2 - time1,
 	}
-	return MotdInfo, err
+	return MotdInfo, nil
 }
