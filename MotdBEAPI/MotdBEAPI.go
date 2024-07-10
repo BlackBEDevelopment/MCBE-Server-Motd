@@ -52,7 +52,7 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 	ClientSendTime := make([]byte, 8) // 客户端发送时间
 	binary.BigEndian.PutUint64(ClientSendTime, uint64(time.Now().Unix()))
 	Magic := []byte{0x00, 0xFF, 0xFF, 0x00, 0xFE, 0xFE, 0xFE, 0xFE, 0xFD, 0xFD, 0xFD, 0xFD} // Magic Number
-	ClientID := []byte{0x00, 0x00, 0x00, 0x00}                                              // 客户端ID
+	ClientID := []byte{0x12, 0x34, 0x56, 0x78}                                              // 客户端ID
 	// 组合数据
 	SendData := append(PacketID, ClientSendTime...)
 	SendData = append(SendData, Magic...)
