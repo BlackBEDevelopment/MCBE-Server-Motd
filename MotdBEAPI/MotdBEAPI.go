@@ -20,7 +20,7 @@ type MotdBEInfo struct {
 	Max            int    `json:"max"`              //最大在线人数
 	LevelName      string `json:"level_name"`       //存档名字
 	GameMode       string `json:"gamemode"`         //游戏模式
-	ServerUniqueID int    `json:"server_unique_id"` //服务器唯一ID
+	ServerUniqueID uint64 `json:"server_unique_id"` //服务器唯一ID
 	Delay          int64  `json:"delay"`            //连接延迟
 }
 
@@ -109,7 +109,7 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 	if err != nil {
 		return errorReturn, err
 	}
-	ServerUniqueIDInt, err := strconv.Atoi(ServerUniqueID)
+	ServerUniqueIDUInt, err := strconv.ParseUint(ServerUniqueID, 10, 64)
 	if err != nil {
 		return errorReturn, err
 	}
@@ -124,7 +124,7 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 		Max:            MaxPlayerCountInt,
 		LevelName:      MOTD2,
 		GameMode:       GameMode,
-		ServerUniqueID: ServerUniqueIDInt,
+		ServerUniqueID: ServerUniqueIDUInt,
 		Delay:          EndTime - StartTime,
 	}
 	return MotdInfo, nil
