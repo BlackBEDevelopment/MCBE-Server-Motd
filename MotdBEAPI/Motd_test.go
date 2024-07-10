@@ -1,14 +1,17 @@
 /*
  * @Author: NyanCatda
  * @Date: 2024-03-30 02:33:22
- * @LastEditTime: 2024-03-30 02:34:31
+ * @LastEditTime: 2024-07-10 17:32:54
  * @LastEditors: NyanCatda
  * @Description: 测试用例
  * @FilePath: \MCBE-Server-Motd\MotdBEAPI\Motd_test.go
  */
 package MotdBEAPI
 
-import "testing"
+import (
+	"encoding/json"
+	"testing"
+)
 
 func TestBE(t *testing.T) {
 	Host := ""
@@ -19,7 +22,13 @@ func TestBE(t *testing.T) {
 		return
 	}
 
-	t.Log(Data)
+	DataJson, err := json.Marshal(Data)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	t.Log(string(DataJson))
 }
 
 func TestJava(t *testing.T) {
@@ -31,5 +40,11 @@ func TestJava(t *testing.T) {
 		return
 	}
 
-	t.Log(Data)
+	DataJson, err := json.Marshal(Data)
+	if err != nil {
+		t.Error(err)
+		return
+	}
+
+	t.Log(string(DataJson))
 }

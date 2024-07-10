@@ -11,7 +11,7 @@ require (
 )
 
 require (
-	github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20211228052232-4fa847734aff
+	github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v1.1.0
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect
