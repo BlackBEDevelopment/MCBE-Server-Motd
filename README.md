@@ -22,7 +22,7 @@ chmod +x ./MCBE-Server-Motd
 ```
 
 ## ⚙️ 构建
-自行构建前需要拥有 Go >= 1.17，yarn等必要依赖
+自行构建前需要拥有 Go >= 1.22，yarn等必要依赖
 
 克隆仓库
 ``` shell
