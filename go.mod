@@ -3,6 +3,7 @@ module github.com/BlackBEDevelopment/MCBE-Server-Motd
 go 1.17
 
 require (
+	github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710095914-61c8ba07bb0c
 	github.com/gin-contrib/cors v1.4.0
 	github.com/gin-gonic/gin v1.8.1
 	github.com/nyancatda/AyaLog v1.0.6
@@ -11,7 +12,6 @@ require (
 )
 
 require (
-	github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v1.1.0
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.0 // indirect
 	github.com/go-playground/universal-translator v0.18.0 // indirect

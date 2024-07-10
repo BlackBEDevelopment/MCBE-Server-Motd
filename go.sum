@@ -1,5 +1,5 @@
-github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20211228052232-4fa847734aff h1:PhrRttyBpG7ZGP1fFK8yNh5Wxbaz8LUq7gwYpZGgJZU=
-github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20211228052232-4fa847734aff/go.mod h1:eCEapt+5lZ89Ug+glv46RVqeoesPSWgW2yfl2ZG11gY=
+github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710095914-61c8ba07bb0c h1:jWDU4xXvF46vhAr2oihOeN3OHepfSi68IfuIxfSF+r0=
+github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710095914-61c8ba07bb0c/go.mod h1:eCEapt+5lZ89Ug+glv46RVqeoesPSWgW2yfl2ZG11gY=
 github.com/ReneKroon/ttlcache/v2 v2.11.0 h1:OvlcYFYi941SBN3v9dsDcC2N8vRxyHcCmJb3Vl4QMoM=
 github.com/ReneKroon/ttlcache/v2 v2.11.0/go.mod h1:mBxvsNY+BT8qLLd6CuAJubbKo6r0jh3nb5et22bbfGY=
 github.com/cespare/xxhash/v2 v2.1.2 h1:YRXhKfTDauu4ajMg1TPgFO5jnlC2HCbmLXMcTG5cbYE=
