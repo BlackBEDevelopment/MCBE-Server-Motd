@@ -4,6 +4,8 @@ github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710100627-f
 github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710100627-f8bb1076099c/go.mod h1:eCEapt+5lZ89Ug+glv46RVqeoesPSWgW2yfl2ZG11gY=
 github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710115507-6bd29100a22d h1:GoRLGx/3q9+y+uUXPrgxegTZ3I9pUZ8ClCzRAEJ+rYw=
 github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240710115507-6bd29100a22d/go.mod h1:eCEapt+5lZ89Ug+glv46RVqeoesPSWgW2yfl2ZG11gY=
+github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240730125523-89fe4e672c59 h1:3z4qjdESNYjcM0Fgxp56iIUA7R3Z1u4i8+Q1VgiH94g=
+github.com/BlackBEDevelopment/MCBE-Server-Motd/MotdBEAPI v0.0.0-20240730125523-89fe4e672c59/go.mod h1:eCEapt+5lZ89Ug+glv46RVqeoesPSWgW2yfl2ZG11gY=
 github.com/bytedance/sonic v1.11.9 h1:LFHENlIY/SLzDWverzdOvgMztTxcfcF+cqNsz9pK5zg=
 github.com/bytedance/sonic v1.11.9/go.mod h1:LysEHSvpvDySVdC2f87zGWf6CIKJcAvqab1ZaiQtds4=
 github.com/bytedance/sonic/loader v0.1.1 h1:c+e5Pt1k/cy5wMveRDyk2X4B9hF4g7an8N3zCYjJFNM=
