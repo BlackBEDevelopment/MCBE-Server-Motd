@@ -20,7 +20,7 @@ type MotdBEInfo struct {
 	Max            int    `json:"max"`              //最大在线人数
 	LevelName      string `json:"level_name"`       //存档名字
 	GameMode       string `json:"gamemode"`         //游戏模式
-	ServerUniqueID uint64 `json:"server_unique_id"` //服务器唯一ID
+	ServerUniqueID string `json:"server_unique_id"` //服务器唯一ID
 	Delay          int64  `json:"delay"`            //连接延迟
 }
 
@@ -50,13 +50,16 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 	PacketID := []byte{0x01} // Packet ID
 	// 获取当前时间戳
 	ClientSendTime := make([]byte, 8) // 客户端发送时间
-	binary.BigEndian.PutUint64(ClientSendTime, uint64(time.Now().Unix()))
+	binary.BigEndian.PutUint64(ClientSendTime, uint64(time.Now().UnixMilli()))
 	Magic := []byte{0x00, 0xFF, 0xFF, 0x00, 0xFE, 0xFE, 0xFE, 0xFE, 0xFD, 0xFD, 0xFD, 0xFD} // Magic Number
-	ClientID := []byte{0x12, 0x34, 0x56, 0x78}                                              // 客户端ID
+	ClientID := []byte{0x12, 0x34, 0x56, 0x78, 0x00}                                        // 客户端ID
+	ClientGUID := make([]byte, 8)                                                           // 客户端GUID
+	binary.BigEndian.PutUint64(ClientGUID, 0)
 	// 组合数据
 	SendData := append(PacketID, ClientSendTime...)
 	SendData = append(SendData, Magic...)
 	SendData = append(SendData, ClientID...)
+	SendData = append(SendData, ClientGUID...)
 
 	// 发送数据
 	StartTime := time.Now().UnixNano() / 1e6 // 记录发送时间
@@ -109,10 +112,6 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 	if err != nil {
 		return errorReturn, err
 	}
-	ServerUniqueIDUInt, err := strconv.ParseUint(ServerUniqueID, 10, 64)
-	if err != nil {
-		return errorReturn, err
-	}
 
 	MotdInfo := &MotdBEInfo{
 		Status:         "online",
@@ -124,7 +123,7 @@ func MotdBE(Host string) (*MotdBEInfo, error) {
 		Max:            MaxPlayerCountInt,
 		LevelName:      MOTD2,
 		GameMode:       GameMode,
-		ServerUniqueID: ServerUniqueIDUInt,
+		ServerUniqueID: ServerUniqueID,
 		Delay:          EndTime - StartTime,
 	}
 	return MotdInfo, nil
